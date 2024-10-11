@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  tov-template:
+    specifier: 'file:'
+    version: 'file:'
+
 devDependencies:
   '@intlify/unplugin-vue-i18n':
     specifier: ^3.0.1
@@ -136,7 +141,7 @@ devDependencies:
     version: 5.5.4
   unocss:
     specifier: ^0.62.3
-    version: 0.62.3(postcss@8.4.41)(vite@5.4.3)
+    version: 0.62.3(postcss@8.4.45)(vite@5.4.3)
   unplugin-auto-import:
     specifier: ^0.18.2
     version: 0.18.2(@vueuse/core@10.11.1)
@@ -1948,7 +1953,7 @@ packages:
       sirv: 2.0.4
     dev: true
 
-  /@unocss/postcss@0.62.3(postcss@8.4.41):
+  /@unocss/postcss@0.62.3(postcss@8.4.45):
     resolution: {integrity: sha512-CwL378ef0QazduXqlaGcWgKJAzemBUxdhapWWiRqI8sXC/eXht5xK6nS1JxqADDuxosgqsGdvcCGmP8ZFrEyiA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -1959,7 +1964,7 @@ packages:
       '@unocss/rule-utils': 0.62.3
       css-tree: 2.3.1
       magic-string: 0.30.11
-      postcss: 8.4.41
+      postcss: 8.4.45
       tinyglobby: 0.2.5
     transitivePeerDependencies:
       - supports-color
@@ -7154,7 +7159,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unocss@0.62.3(postcss@8.4.41)(vite@5.4.3):
+  /unocss@0.62.3(postcss@8.4.45)(vite@5.4.3):
     resolution: {integrity: sha512-CLS6+JIlBobe/iPTz07pehyGDP8VqGJsiE+ZZ3Xkgib3hw76nCqAQF/4mJ8jVoV4C8KvGyVxmHaSSCFOkWmmZg==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -7170,7 +7175,7 @@ packages:
       '@unocss/cli': 0.62.3
       '@unocss/core': 0.62.3
       '@unocss/extractor-arbitrary-variants': 0.62.3
-      '@unocss/postcss': 0.62.3(postcss@8.4.41)
+      '@unocss/postcss': 0.62.3(postcss@8.4.45)
       '@unocss/preset-attributify': 0.62.3
       '@unocss/preset-icons': 0.62.3
       '@unocss/preset-mini': 0.62.3
@@ -8044,3 +8049,10 @@ packages:
     dependencies:
       tslib: 2.3.0
     dev: true
+
+  'file:':
+    resolution: {directory: '', type: directory}
+    name: tov-template
+    engines: {node: '>=20.17.0'}
+    requiresBuild: true
+    dev: false
