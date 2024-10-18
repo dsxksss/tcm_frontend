@@ -25,6 +25,7 @@ provide(
 )
 
 const option = ref<EChartsOption>({
+	backgroundColor: '',
 	title: {
 		text: 'Traffic Sources',
 		left: 'center',
