@@ -10,6 +10,7 @@ import {
 } from 'echarts/components'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import type { EChartsOption } from 'echarts'
+import { GraphChart } from 'echarts/charts'
 
 use([
 	CanvasRenderer,
@@ -17,6 +18,7 @@ use([
 	TitleComponent,
 	TooltipComponent,
 	LegendComponent,
+	GraphChart,
 ])
 
 provide(
@@ -31,34 +33,74 @@ const option = ref<EChartsOption>({
 		left: 'center',
 	},
 	tooltip: {
-		trigger: 'item',
-		formatter: '{a} <br/>{b} : {c} ({d}%)',
-	},
-	legend: {
-		orient: 'vertical',
-		left: 'left',
-		data: ['Direct', 'Email', 'Ad Networks', 'Video Ads', 'Search Engines'],
+		show: true,
+		formatter: (params) => {
+			return `${params.data.name}: ${params.data.value}`
+		},
 	},
 	series: [
 		{
-			name: 'Traffic Sources',
-			type: 'pie',
-			radius: '55%',
-			center: ['50%', '60%'],
-			data: [
-				{ value: 335, name: 'Direct' },
-				{ value: 310, name: 'Email' },
-				{ value: 234, name: 'Ad Networks' },
-				{ value: 135, name: 'Video Ads' },
-				{ value: 1548, name: 'Search Engines' },
-			],
-			emphasis: {
-				itemStyle: {
-					shadowBlur: 10,
-					shadowOffsetX: 0,
-					shadowColor: 'rgba(0, 0, 0, 0.5)',
-				},
+			name: '我是标题',
+			type: 'graph',
+			layout: 'force',
+			legendHoverLink: true,
+			hoverAnimation: true,
+			force: {
+				repulsion: 450,
+				edgeLength: [150, 200],
+				layoutAnimation: true,
 			},
+			roam: true,
+			nodeScaleRatio: 0.6,
+			draggable: true,
+			focusNodeAdjacency: true,
+			edgeSymbol: ['none', 'arrow'],
+			symbolSize: 50,
+			edgeSymbolSize: 10,
+			itemStyle: {
+				normal: {
+					label: {
+						show: true,
+					},
+				},
+				emphasis: {},
+			},
+			lineStyle: {
+				normal: {
+					color: '#31354B',
+					width: 1,
+					type: 'solid',
+					curveness: 0,
+					opacity: 1,
+				},
+				emphasis: {},
+			},
+			label: {
+				normal: {
+					show: true,
+					position: 'bottom',
+					textStyle: {
+						color: '#2D2F3B',
+						fontStyle: 'normal',
+						fontWeight: 'bolder',
+						fontFamily: 'sans-serif',
+						fontSize: 12,
+					},
+				},
+				emphasis: {},
+			},
+			data: [
+				{ name: '节点1', value: 10 },
+				{ name: '节点2', value: 20 },
+				{ name: '节点3', value: 30 },
+				{ name: '节点4', value: 40 },
+			],
+			links: [
+				{ source: '节点1', target: '节点2' },
+				{ source: '节点2', target: '节点3' },
+				{ source: '节点3', target: '节点1' },
+				{ source: '节点4', target: '节点1' },
+			],
 		},
 	],
 })
