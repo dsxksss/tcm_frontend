@@ -1,50 +1,49 @@
 <script setup lang="ts">
-import { getRoutes } from '@/plugins/router'
-import { SwitchIcon } from 'vue-dark-switch'
+import { useI18n } from 'vue-i18n'
 
+// Setup i18n
 const { te, t } = useI18n()
-
-const routes = getRoutes()
-	.filter((r) => !r.path.includes('notFound'))
-	.map((r) => {
-		let { path, name } = r
-		if (path === safeResolve('/')) {
-			return { path, name: 'home' }
-		}
-
-		if (!name) {
-			name = path
-		}
-
-		return { path, name: name.toString().slice(1).replaceAll('/', ' · ') }
-	})
-
-const $route = useRoute()
 </script>
 
 <template>
 	<nav
 		aria-label="Site Nav"
-		class="h-60px max-w-100vw flex items-center justify-between p-4"
+		class="h-60px max-w-100vw flex items-center justify-center p-4"
 	>
-		<div class="flex items-center justify-center space-x-5">
-			<SwitchIcon unmount-persets />
-		</div>
-
 		<ul class="flex items-center gap-2 text-sm font-medium">
-			<li v-for="r of routes" :key="r.path" class="hidden !block">
-				<RouterLink
-					class="rounded-lg px-3 py-2 hover:text-blue-700"
-					:class="$route.path === r.path ? 'text-blue-700' : ''"
-					:to="r.path"
-				>
-					{{ te(r.name) ? t(r.name) : r.name }}
-				</RouterLink>
-			</li>
-
-			<li class="hidden !block">
-				<Dropdown />
-			</li>
+			<el-menu
+				:default-active="`/`"
+				mode="horizontal"
+				:ellipsis="false"
+				:router="true"
+				@select="handleSelect"
+			>
+				<el-menu-item :key="`/`" :index="`/`">
+					{{ 'Home' }}
+				</el-menu-item>
+				<el-menu-item :key="`browse`" index="1">
+					<el-sub-menu :index="main">
+						<template #title>Browse</template>
+						<el-menu-item v-for="sub in subItems" :key="sub" :index="sub">
+							{{ te(sub) ? t(sub) : sub }}
+						</el-menu-item>
+					</el-sub-menu>
+				</el-menu-item>
+				<el-menu-item :key="`/analyze`" :index="`/analyze`">
+					{{ te('analyze') ? te('analyze') : 'Analyze' }}
+				</el-menu-item>
+				<el-menu-item :key="`/download`" :index="`/download`">
+					{{ te('download') ? te('download') : 'Download' }}
+				</el-menu-item>
+				<el-menu-item :key="`/docs`" :index="`/docs`">
+					{{ te('docs') ? te('docs') : 'Docs' }}
+				</el-menu-item>
+			</el-menu>
 		</ul>
 	</nav>
 </template>
+<style>
+.el-menu--horizontal > .el-menu-item:nth-child(1) {
+	margin-right: auto;
+}
+</style>

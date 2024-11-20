@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { use } from 'echarts/core'
-import { isDark } from 'vue-dark-switch'
 import { PieChart } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
 import {
@@ -8,7 +7,7 @@ import {
 	TooltipComponent,
 	LegendComponent,
 } from 'echarts/components'
-import VChart, { THEME_KEY } from 'vue-echarts'
+import VChart from 'vue-echarts'
 import type { EChartsOption } from 'echarts'
 import { GraphChart } from 'echarts/charts'
 
@@ -20,11 +19,6 @@ use([
 	LegendComponent,
 	GraphChart,
 ])
-
-provide(
-	THEME_KEY,
-	computed(() => (isDark.value ? 'dark' : '')),
-)
 
 const option = ref<EChartsOption>({
 	backgroundColor: '',

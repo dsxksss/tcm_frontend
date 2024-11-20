@@ -130,6 +130,7 @@
     "iOS >= 8"
   ],
   "dependencies": {
+    "element-plus": "^2.8.8",
     "tov-template": "file:"
   }
 }
